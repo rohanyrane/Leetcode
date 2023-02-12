@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        if(root->val==x || root->val==y)
+            return false;
+
+        int parentx=-1;
+        int heightx=checkHeight(root,parentx,x,0);
+
+        int parenty=-1;
+        int heighty=checkHeight(root,parenty,y,0);  
+
+        if(parentx!=parenty && heightx==heighty)
+            return true;   
+        else
+            return false;   
+    }
+
+    int checkHeight(TreeNode * curr, int &parent,int value, int height ){
+        if(!curr)
+            return 0;
+        
+        if(curr->val==value)
+            return height;
+
+        parent=curr->val;
+
+        int left=checkHeight(curr->left, parent,value, height+1);
+        if(left)
+            return left;
+
+        parent=curr->val;
+
+        int right=checkHeight(curr->right, parent,value, height+1);
+        return right;
+
+    }
+};
