@@ -1,0 +1,35 @@
+
+class Solution {
+    public boolean isCousins(TreeNode root, int x, int y) {
+        
+       ArrayList<Integer> path1= new ArrayList<>();
+       ArrayList<Integer> path2= new ArrayList<>();
+       hasPath(root,x,path1);
+       hasPath(root,y,path2);
+       if(path1.size()==path2.size()&&(path1.get(path1.size()-2)!=path2.get(path2.size()-2))) return true;
+       else return false;
+    }
+    
+    boolean hasPath(TreeNode root,int x,ArrayList<Integer> arr){
+         if (root==null)
+            return false;
+       
+       
+        arr.add(root.val);    
+       
+       
+        if (root.val == x)    
+            return true;
+       
+       
+        if (hasPath(root.left, x,arr) ||
+            hasPath(root.right, x,arr))
+            return true;
+       
+        
+        arr.remove(arr.size()-1);
+        return false;   
+    }
+    
+}
+
